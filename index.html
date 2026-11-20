@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>경영개선 포털 | 업무 혁신·윤리경영 안내</title>
+<script>
+try{var _t=localStorage.getItem('portal-theme');if(_t!=='dark'&&_t!=='light')_t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=_t;}catch(e){}
+</script>
+<style>
+  :root{
+    /* 우리 부서 포털 디자인 시스템 토큰 */
+    --navy-900:#0a1830;
+    --navy-800:#10264a;
+    --navy-700:#1b3a6b;
+    --navy-600:#2f5aa0;
+    --navy-100:#e3ecf8;
+    --navy-50:#f3f7fc;
+    --ink-900:#14181f;
+    --ink-800:#1c222c;
+    --ink-600:#44505f;
+    --ink-400:#7a8594;
+    --line:#dbe3ee;
+    --white:#ffffff;
+    --surface-sunken:#eef2f8;
+    --mint:#5eead4;
+    --mint-hover:#8ff3e2;
+    --mint-deep:#14b8a6;
+    --mint-bg:#d9faf3;
+    --mint-ink:#0b4a41;
+    --mint-ink-soft:#0f5a4f;
+    --label-bg:#e0f4f1;
+    --label-ink:#0f6b60;
+    --on-dark-2:#dbe6f7;
+    --on-dark-3:#cbd8ee;
+    --on-dark-4:#b9c9e4;
+    --on-dark-muted:#8093b0;
+    --footer-text:#a5b0c2;
+    --danger:#d64545;
+    --warning:#e09b1a;
+    --success:#3f9a4b;
+    --level-low:var(--level-low);
+    --level-mid:var(--level-mid);
+    --space-1:6px;
+    --space-2:8px;
+    --space-3:12px;
+    --space-4:16px;
+    --space-5:18px;
+    --space-6:20px;
+    --space-7:24px;
+    --space-8:28px;
+    --space-9:76px;
+    --nav-height:60px;
+    --content-max:1120px;
+    --radius-xs:6px;
+    --radius-sm:10px;
+    --radius-md:12px;
+    --radius-lg:14px;
+    --radius-pill:999px;
+    --shadow-card:0 6px 24px rgba(16,38,74,.10);
+    --shadow-button-hover:0 4px 14px rgba(20,184,166,.45);
+    --shadow-dialog:var(--shadow-dialog);
+    --font-sans:Pretendard, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+    /* 기존 변수명 → 디자인 시스템 토큰 연결 (본문 규칙은 그대로 사용) */
+    --p900:var(--navy-900); --p800:var(--navy-800); --p700:var(--navy-700); --p600:var(--navy-600); --p100:var(--navy-100); --p50:var(--navy-50);
+    --ch900:var(--ink-900); --ch800:var(--ink-800); --ch600:var(--ink-600); --ch400:var(--ink-400);
+    --lime:var(--mint); --lime-d:var(--mint-deep); --lime-bg:var(--mint-bg);
+    --red:var(--danger); --amber:var(--warning); --green:var(--success);
+    --nav-h:var(--nav-height); --radius:var(--radius-lg); --shadow:var(--shadow-card);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth; scroll-padding-top:calc(var(--nav-h) + 12px)}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+  body{margin:0;font-family:var(--font-sans);color:var(--ch900);background:var(--p50);line-height:1.65;word-break:keep-all;-webkit-text-size-adjust:100%}
+  a{color:inherit}
+  h1,h2,h3,p{margin:0}
+  .wrap{max-width:var(--content-max);margin:0 auto;padding:0 var(--space-6)}
+  :focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+
+  /* ===== 상단 고정 메뉴 ===== */
+  .topbar{position:sticky;top:0;z-index:100;background:rgba(10,24,48,.97);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.08)}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;min-height:var(--nav-h);gap:16px}
+  .brand{display:flex;align-items:center;gap:10px;color:var(--white);text-decoration:none;font-weight:800;letter-spacing:-.02em;white-space:nowrap}
+  .brand .dot{width:12px;height:12px;border-radius:4px;background:var(--lime);transform:rotate(45deg)}
+  .menu{display:flex;gap:2px;list-style:none;margin:0;padding:0}
+  .menu a{display:block;padding:8px 11px;border-radius:var(--radius-pill);color:var(--on-dark-3);text-decoration:none;font-size:14.5px;font-weight:600;white-space:nowrap;transition:background .2s,color .2s}
+  .menu a:hover{background:rgba(255,255,255,.1);color:var(--white)}
+  .menu a.active{background:var(--lime);color:var(--p900)}
+  .burger{display:none;position:relative;flex:none;width:44px;height:44px;background:none;border:1px solid rgba(255,255,255,.3);color:var(--white);border-radius:var(--radius-sm);cursor:pointer}
+  .burger .lines{position:absolute;left:12px;top:20px;width:20px;height:2px;border-radius:2px;background:var(--white);transition:background .2s}
+  .burger .lines::before,.burger .lines::after{content:"";position:absolute;left:0;width:20px;height:2px;border-radius:2px;background:var(--white);transition:top .2s,transform .2s}
+  .burger .lines::before{top:-6px}
+  .burger .lines::after{top:6px}
+  .burger[aria-expanded="true"] .lines{background:transparent}
+  .burger[aria-expanded="true"] .lines::before{top:0;transform:rotate(45deg)}
+  .burger[aria-expanded="true"] .lines::after{top:0;transform:rotate(-45deg)}
+  .now{display:none}
+
+  /* ===== 공통 섹션 ===== */
+  section{padding:var(--space-9) 0 8px}
+  section:last-of-type{padding-bottom:80px}
+  .sec-head{margin-bottom:var(--space-8)}
+  .eyebrow{display:inline-block;font-size:12.5px;font-weight:800;letter-spacing:.08em;color:var(--label-ink);background:var(--label-bg);padding:4px 11px;border-radius:var(--radius-pill);margin-bottom:10px}
+  h2{font-size:clamp(24px,3.4vw,32px);letter-spacing:-.03em;line-height:1.3;color:var(--p800)}
+  .sec-head p{color:var(--ch600);margin-top:8px;max-width:720px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:var(--space-7)}
+  .grid{display:grid;gap:var(--space-5)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:var(--radius-md);padding:var(--space-3) var(--space-6);font:inherit;font-weight:800;cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .15s,background .2s}
+  .btn:active{transform:translateY(1px)}
+  .btn-lime{background:var(--lime);color:var(--p900)}
+  .btn-lime:hover{background:var(--mint-hover);box-shadow:var(--shadow-button-hover)}
+  .btn-dark{background:var(--p800);color:var(--white)}
+  .btn-dark:hover{background:var(--p700)}
+  .btn-ghost{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,.4)}
+  .btn-ghost:hover{background:rgba(255,255,255,.1)}
+  .note{font-size:13px;color:var(--ch400)}
+
+  /* ===== 홈(히어로) ===== */
+  .hero{padding:0;background:radial-gradient(900px 400px at 85% -10%,rgba(94,234,212,.18),transparent 60%),linear-gradient(135deg,var(--p900),var(--p700) 70%,var(--ch800));color:var(--white)}
+  .hero .wrap{padding-top:72px;padding-bottom:80px}
+  .hero .tag{display:inline-block;color:var(--p900);background:var(--lime);font-weight:800;font-size:13px;padding:5px 12px;border-radius:var(--radius-pill);margin-bottom:18px}
+  .hero h1{font-size:clamp(34px,6vw,58px);letter-spacing:-.04em;line-height:1.15;margin-bottom:16px}
+  .hero h1 em{font-style:normal;color:var(--lime)}
+  .hero p.lead{font-size:clamp(16px,2vw,19px);color:var(--on-dark-3);max-width:640px}
+  .hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+  .privacy-pill{margin-top:26px;display:inline-flex;gap:8px;align-items:center;font-size:13.5px;color:var(--on-dark-4);border:1px dashed rgba(255,255,255,.3);border-radius:var(--radius-sm);padding:8px 12px}
+
+  /* ===== 역할 ===== */
+  .role .ico{width:46px;height:46px;border-radius:var(--radius-lg);background:var(--p800);color:var(--lime);display:grid;place-items:center;font-size:22px;margin-bottom:14px}
+  .role h3{font-size:19px;color:var(--p800);margin-bottom:6px;letter-spacing:-.02em}
+  .role p{font-size:15px;color:var(--ch600)}
+  .role{transition:transform .2s,box-shadow .2s}
+  .role:hover{transform:translateY(-4px)}
+
+  /* ===== PI 타임라인 ===== */
+  .timeline{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;position:relative;counter-reset:s}
+  .timeline::before{content:"";position:absolute;left:8%;right:8%;top:27px;height:4px;background:linear-gradient(90deg,var(--p600),var(--lime));border-radius:4px}
+  .timeline li{position:relative;text-align:center;padding:0 6px}
+  .timeline .num{position:relative;z-index:1;width:56px;height:56px;margin:0 auto 14px;border-radius:50%;background:var(--p800);color:var(--lime);font-weight:900;font-size:20px;display:grid;place-items:center;border:4px solid var(--p50)}
+  .timeline li:last-child .num{background:var(--lime);color:var(--p900)}
+  .timeline h3{font-size:18px;color:var(--p800);margin-bottom:4px}
+  .timeline p{font-size:14.5px;color:var(--ch600)}
+
+  /* ===== 혁신 사례 ===== */
+  .case .badge{display:inline-block;font-size:12px;font-weight:800;color:var(--p700);background:var(--p100);padding:3px 10px;border-radius:var(--radius-pill);margin-bottom:10px}
+  .case h3{font-size:18px;color:var(--p800);margin-bottom:14px;letter-spacing:-.02em}
+  .ba{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .ba div{border-radius:var(--radius-md);padding:12px;font-size:14px}
+  .ba .b{background:var(--surface-sunken);color:var(--ch600)}
+  .ba .a{background:var(--lime-bg);color:var(--mint-ink)}
+  .ba small{display:block;font-weight:800;letter-spacing:.04em;margin-bottom:2px;font-size:11.5px}
+  .ba strong{font-size:17px;display:block;color:var(--ch900)}
+  .result{margin-top:12px;font-weight:800;color:var(--p700);font-size:15px}
+  .result span{background:var(--lime);padding:1px 8px;border-radius:6px;color:var(--p900)}
+  .sample-note{margin-top:14px}
+
+  /* ===== 자가점검 ===== */
+  .check-layout{display:grid;grid-template-columns:1.15fr .85fr;gap:20px;align-items:start}
+  .checks{display:grid;gap:10px}
+  .chk{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border:1.5px solid var(--line);border-radius:var(--radius-md);cursor:pointer;background:var(--surface);transition:border-color .2s,background .2s}
+  .chk:hover{border-color:var(--p600)}
+  .chk:has(input:checked){border-color:var(--p600);background:var(--p50)}
+  .chk input{width:20px;height:20px;margin-top:3px;accent-color:var(--p700);flex:none}
+  .chk b{display:block;color:var(--p800)}
+  .chk span{font-size:14px;color:var(--ch600)}
+  .result-card{position:sticky;top:calc(var(--nav-h) + 16px);background:linear-gradient(160deg,var(--p800),var(--ch800));color:var(--white);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow)}
+  .result-card h3{font-size:15px;color:var(--on-dark-4);font-weight:700}
+  .level{font-size:44px;font-weight:900;letter-spacing:-.03em;margin:4px 0 2px}
+  .level.low{color:var(--level-low)}.level.mid{color:var(--level-mid)}.level.high{color:var(--lime)}.level.none{color:var(--on-dark-muted);font-size:26px}
+  .meter{height:10px;border-radius:var(--radius-sm);background:rgba(255,255,255,.15);overflow:hidden;margin:10px 0 14px}
+  .meter i{display:block;height:100%;width:0;background:var(--lime);border-radius:var(--radius-sm);transition:width .4s}
+  .result-card ul{padding-left:18px;margin:8px 0 0;font-size:14.5px;color:var(--on-dark-2)}
+  .result-card .msg{font-size:14.5px;color:var(--on-dark-2)}
+  .reset{margin-top:16px;background:transparent;border:1px solid rgba(255,255,255,.35);color:var(--white);border-radius:var(--radius-sm);padding:8px 14px;font:inherit;font-weight:700;cursor:pointer}
+  .reset:hover{background:rgba(255,255,255,.1)}
+
+  /* ===== 효과 계산기 ===== */
+  .calc-layout{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-weight:800;color:var(--p800);margin-bottom:6px;font-size:15px}
+  .field .inp{display:flex;align-items:center;border:1.5px solid var(--line);border-radius:var(--radius-md);background:var(--surface);overflow:hidden}
+  .field .inp:focus-within{border-color:var(--p600);box-shadow:0 0 0 3px rgba(47,90,160,.15)}
+  .field input{flex:1;min-width:0;border:0;padding:13px 14px;font:inherit;font-size:17px;outline:0;background:transparent}
+  .field .unit{padding:0 14px;color:var(--ch400);font-weight:700;background:var(--p50);align-self:stretch;display:grid;place-items:center;border-left:1px solid var(--line)}
+  .kpis{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .kpi{background:rgba(255,255,255,.08);border-radius:var(--radius-lg);padding:16px}
+  .kpi small{display:block;color:var(--on-dark-4);font-weight:700;font-size:13px}
+  .kpi strong{display:block;font-size:30px;letter-spacing:-.03em;line-height:1.2;margin-top:2px}
+  .kpi.big{grid-column:1/-1;background:var(--lime);color:var(--p900)}
+  .kpi.big small{color:var(--mint-ink)}
+  .kpi.big strong{font-size:42px}
+  .bars{margin-top:16px;display:grid;gap:8px}
+  .bar-row{display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:center;font-size:13px;color:var(--on-dark-2)}
+  .bar-row .track{height:14px;background:rgba(255,255,255,.12);border-radius:8px;overflow:hidden}
+  .bar-row .track i{display:block;height:100%;border-radius:8px;transition:width .4s}
+  .bar-row.b i{background:var(--on-dark-muted)}.bar-row.a i{background:var(--lime)}
+  .calc-msg{margin-top:12px;font-size:14px;color:var(--level-mid);min-height:1.5em}
+  .out-card{background:linear-gradient(160deg,var(--p800),var(--ch800));color:var(--white);border:0}
+
+  /* ===== 윤리경영 ===== */
+  .eth .ico{width:42px;height:42px;border-radius:var(--radius-md);background:var(--lime);color:var(--p900);display:grid;place-items:center;font-size:20px;margin-bottom:12px}
+  .eth h3{font-size:17.5px;color:var(--p800);margin-bottom:6px;letter-spacing:-.02em}
+  .eth p{font-size:14.5px;color:var(--ch600)}
+  .report{margin-top:20px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;background:linear-gradient(135deg,var(--p800),var(--ch800));color:var(--white);border-radius:var(--radius);padding:26px 28px}
+  .report h3{font-size:20px}
+  .report p{color:var(--on-dark-3);font-size:14.5px;margin-top:4px;max-width:620px}
+  dialog{border:0;border-radius:var(--radius);padding:0;max-width:min(520px,92vw);width:100%;box-shadow:var(--shadow-dialog)}
+  dialog::backdrop{background:rgba(10,24,48,.6)}
+  .dlg{padding:26px}
+  .dlg h3{color:var(--p800);font-size:20px;margin-bottom:10px}
+  .dlg dl{margin:14px 0;display:grid;grid-template-columns:90px 1fr;gap:8px 12px;font-size:15px}
+  .dlg dt{font-weight:800;color:var(--p700)}
+  .dlg dd{margin:0;color:var(--ch600)}
+  .dlg .warn{background:var(--lime-bg);border-radius:var(--radius-sm);padding:10px 12px;font-size:13.5px;color:var(--mint-ink-soft)}
+  .dlg .row{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}
+
+  /* ===== FAQ ===== */
+  .search{position:relative;margin-bottom:16px}
+  .search input{width:100%;padding:15px 16px 15px 46px;border:1.5px solid var(--line);border-radius:var(--radius-lg);font:inherit;font-size:16px;background:var(--surface);outline:0}
+  .search input:focus{border-color:var(--p600);box-shadow:0 0 0 3px rgba(47,90,160,.15)}
+  .search::before{content:"🔍";position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:17px}
+  .faq-chips{display:flex;flex-wrap:wrap;gap:var(--space-2);margin-bottom:var(--space-4)}
+  .chip{min-height:40px;padding:6px 14px;border:1.5px solid var(--line);border-radius:var(--radius-pill);background:var(--surface);color:var(--p800);font:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:border-color .2s,background .2s}
+  .chip:hover{border-color:var(--p600)}
+  .chip[aria-pressed="true"]{background:var(--lime);border-color:var(--lime);color:var(--p900)}
+  .faq-list{display:grid;gap:10px}
+  .faq-cat{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:14px;font-weight:800;letter-spacing:-.01em;color:var(--p600)}
+  .faq-cat:first-child{margin-top:0}
+  .faq-cat::before{content:"";width:9px;height:9px;border-radius:3px;background:var(--lime-d);transform:rotate(45deg);flex:none}
+  .faq-cat[hidden]{display:none}
+  details.faq{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden}
+  details.faq[open]{border-color:var(--p600);box-shadow:var(--shadow)}
+  details.faq summary{cursor:pointer;list-style:none;padding:16px 52px 16px 18px;font-weight:800;color:var(--p800);position:relative}
+  details.faq summary::-webkit-details-marker{display:none}
+  details.faq summary::after{content:"+";position:absolute;right:18px;top:50%;transform:translateY(-50%);width:26px;height:26px;border-radius:50%;background:var(--p100);color:var(--p700);display:grid;place-items:center;font-size:18px;line-height:1}
+  details.faq[open] summary::after{content:"–";background:var(--lime);color:var(--p900)}
+  details.faq .ans{padding:0 18px 18px;color:var(--ch600);font-size:15px}
+  details.faq .ans b.q{color:var(--p700)}
+  mark{background:var(--lime);color:var(--p900);border-radius:3px;padding:0 2px}
+  .faq-empty{display:none;text-align:center;padding:28px;color:var(--ch400);background:var(--surface);border:1px dashed var(--line);border-radius:var(--radius-lg)}
+
+  /* ===== 자료실 ===== */
+  .file{display:flex;flex-direction:column;gap:12px}
+  .file .ftop{display:flex;gap:14px;align-items:flex-start}
+  .file .ficon{flex:none;width:48px;height:56px;border-radius:8px;background:var(--p800);color:var(--lime);display:grid;place-items:center;font-weight:900;font-size:12px}
+  .file h3{font-size:18px;color:var(--p800)}
+  .file p{font-size:14.5px;color:var(--ch600)}
+  .file .btn{align-self:flex-start}
+
+  /* 자료실 파일 목록 */
+  .doc-title{font-size:18px;color:var(--p800);letter-spacing:-.02em;margin:32px 0 12px}
+  .doc-list{list-style:none;margin:0;padding:0;display:grid;gap:var(--space-3)}
+  .doc{display:grid;grid-template-columns:48px 1fr auto auto;gap:var(--space-4);align-items:center;padding:var(--space-4) var(--space-6)}
+  .doc .ficon{width:48px;height:56px;border-radius:8px;background:var(--p800);color:var(--lime);display:grid;place-items:center;font-weight:900;font-size:12px}
+  .doc h3{font-size:16px;color:var(--p800);overflow-wrap:anywhere}
+  .doc p{font-size:14.5px;color:var(--ch600)}
+  .doc-size{font-size:14px;font-weight:700;color:var(--ch600);white-space:nowrap}
+
+  footer{background:var(--ch900);color:var(--footer-text);padding:34px 0;font-size:14px}
+  footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+  footer b{color:var(--white)}
+
+
+  /* ===== 테마 전환 · 맨 위로 버튼 ===== */
+  :root{--surface:var(--white);color-scheme:light}
+  .theme-toggle{order:1;display:inline-grid;place-items:center;flex:none;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:none;color:var(--white);cursor:pointer;transition:background .2s}
+  .theme-toggle:hover{background:rgba(255,255,255,.1)}
+  .theme-toggle .i-sun{display:none}
+  [data-theme="dark"] .theme-toggle .i-moon{display:none}
+  [data-theme="dark"] .theme-toggle .i-sun{display:block}
+  .to-top{position:fixed;right:20px;bottom:20px;z-index:90;display:grid;place-items:center;width:48px;height:48px;border:0;border-radius:50%;background:var(--lime);color:var(--p900);box-shadow:0 6px 18px rgba(0,0,0,.28);cursor:pointer;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .25s,transform .25s,visibility .25s,background .2s}
+  .to-top.show{opacity:1;visibility:visible;transform:none}
+  .to-top:hover{background:var(--mint-hover)}
+  @media print{.to-top,.theme-toggle{display:none}}
+
+  /* ===== 다크 모드 ===== */
+  [data-theme="dark"]{
+    color-scheme:dark;
+    --surface:#111c31; --p50:#0a1220; --line:#26364f;
+    --ch900:#e6edf7; --ch600:#b4c0d3; --ch400:#8d9bb0;
+    --p800:#e3ecf8; --p700:#a9c6f2; --p600:#5b8fd6; --p100:#1b2b47;
+    --surface-sunken:#0d1729; --lime-bg:#11322f;
+    --label-bg:rgba(94,234,212,.12); --label-ink:#7ff0de;
+    --shadow-card:0 6px 24px rgba(0,0,0,.35);
+  }
+  [data-theme="dark"] .hero{background:radial-gradient(900px 400px at 85% -10%,rgba(94,234,212,.14),transparent 60%),linear-gradient(135deg,#07101f,#12305a 70%,#14213a)}
+  [data-theme="dark"] .btn-dark{background:#1b3a6b}
+  [data-theme="dark"] .btn-dark:hover{background:#2f5aa0}
+  [data-theme="dark"] .role .ico,[data-theme="dark"] .timeline .num,[data-theme="dark"] .file .ficon,[data-theme="dark"] .doc .ficon{background:#1b3a6b}
+  [data-theme="dark"] .result-card,[data-theme="dark"] .out-card{background:linear-gradient(160deg,#10264a,#1c222c);border:1px solid rgba(255,255,255,.08)}
+  [data-theme="dark"] .report{background:linear-gradient(135deg,#10264a,#1c222c);border:1px solid rgba(255,255,255,.08)}
+  [data-theme="dark"] footer{background:#060c17}
+  [data-theme="dark"] .field input,[data-theme="dark"] .search input{color:var(--ch900)}
+  [data-theme="dark"] ::placeholder{color:var(--ch400);opacity:1}
+  [data-theme="dark"] .ba .a{color:#aef5e9}
+  [data-theme="dark"] dialog{background:var(--surface);color:var(--ch900)}
+  [data-theme="dark"] dialog::backdrop{background:rgba(0,0,0,.65)}
+  [data-theme="dark"] .dlg .warn{color:#aef5e9}
+  [data-theme="dark"] .to-top{box-shadow:0 6px 18px rgba(0,0,0,.5)}
+
+  /* ===== 반응형 ===== */
+  @keyframes navIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+  @media (max-width:1080px){
+    .menu a{padding:8px 8px;font-size:13.5px}
+  }
+  @media (max-width:960px){
+    .burger{display:block}
+    .topbar .wrap{gap:10px}
+    .theme-toggle{order:0;width:44px;height:44px;border-radius:var(--radius-sm)}
+    .to-top{right:16px;bottom:16px}
+    .brand{min-height:var(--nav-height)}
+    .now{display:block;margin-left:auto;max-width:45vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--lime);font-size:13.5px;font-weight:700}
+    .topbar .wrap{flex-wrap:wrap;padding-top:0;padding-bottom:0}
+    .topbar .wrap > .top-row{display:contents}
+    nav{width:100%;display:none;order:3;padding-bottom:12px}
+    nav.open{display:block;max-height:calc(100vh - var(--nav-h));max-height:calc(100dvh - var(--nav-h));overflow-y:auto;animation:navIn .18s ease-out}
+    .menu{flex-direction:column;gap:4px}
+    .menu a{padding:12px 14px;border-radius:var(--radius-sm);font-size:15.5px}
+    .g4{grid-template-columns:repeat(2,1fr)}
+    .g3{grid-template-columns:1fr}
+    .check-layout,.calc-layout{grid-template-columns:minmax(0,1fr)}
+    .result-card{position:static}
+    .timeline{grid-template-columns:1fr;gap:6px}
+    .timeline::before{left:27px;right:auto;top:20px;bottom:20px;width:4px;height:auto;background:linear-gradient(180deg,var(--p600),var(--lime))}
+    .timeline li{display:grid;grid-template-columns:56px 1fr;gap:16px;text-align:left;padding:8px 0;align-items:start}
+    .timeline .num{margin:0}
+  }
+  @media (max-width:560px){
+    .doc{grid-template-columns:48px 1fr}
+    .doc-size{grid-column:2}
+    .doc .btn{grid-column:1/-1}
+    .wrap{padding:0 16px}
+    section{padding-top:60px}
+    .g4,.g2{grid-template-columns:1fr}
+    .hero .wrap{padding-top:52px;padding-bottom:56px}
+    .kpis{grid-template-columns:1fr}
+    .kpi.big{grid-column:auto}
+    .ba{grid-template-columns:1fr}
+    .report{padding:22px}
+    .dlg dl{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar" id="topbar">
+  <div class="wrap">
+    <div class="top-row" style="display:contents">
+      <a class="brand" href="#home"><span class="dot"></span>경영개선 포털</a>
+      <span class="now" id="navNow" aria-hidden="true"></span>
+      <button class="theme-toggle" id="themeBtn" type="button" aria-pressed="false" aria-label="다크 모드">
+        <svg class="i-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M20.7 14.5A8.5 8.5 0 0 1 9.5 3.3a.7.7 0 0 0-.9-.9A10 10 0 1 0 21.6 15.4a.7.7 0 0 0-.9-.9z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.9 1.9M16.8 16.8l1.9 1.9M18.7 5.3l-1.9 1.9M7.2 16.8l-1.9 1.9"/></g></svg>
+      </button>
+      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="mainnav" aria-label="메뉴 열기"><span class="lines" aria-hidden="true"></span></button>
+    </div>
+    <nav id="mainnav" aria-label="주요 메뉴">
+      <ul class="menu">
+        <li><a href="#home">홈</a></li>
+        <li><a href="#roles">역할</a></li>
+        <li><a href="#pi">PI 단계</a></li>
+        <li><a href="#cases">혁신 사례</a></li>
+        <li><a href="#check">자가점검</a></li>
+        <li><a href="#calc">효과 계산기</a></li>
+        <li><a href="#ethics">윤리경영</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#library">자료실</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- 홈 -->
+<section class="hero" id="home" style="padding-top:0">
+  <div class="wrap">
+    <span class="tag">업무 혁신 · 윤리경영 안내</span>
+    <h1>경영개선 포털<br><em>일하는 방식</em>을 바꾸고, <em>원칙</em>을 지킵니다</h1>
+    <p class="lead">낭비를 찾아 줄이고(PI), 투명하게 점검하며(진단·감사), 지속 가능한 업무 체질을 만드는 임직원을 위한 안내 포털입니다.</p>
+    <div class="cta">
+      <a class="btn btn-lime" href="#check">우리 팀 자가점검 시작</a>
+      <a class="btn btn-ghost" href="#calc">개선 효과 계산하기</a>
+    </div>
+    <div class="privacy-pill">🔒 이 페이지에 입력한 내용은 저장되거나 외부로 전송되지 않습니다.</div>
+  </div>
+</section>
+
+<!-- 역할 -->
+<section id="roles">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">ROLES</span>
+      <h2>경영개선 조직의 4가지 역할</h2>
+      <p>현업과 함께 비효율을 찾아 개선하고, 개선 결과가 조직에 뿌리내리도록 지원합니다.</p>
+    </div>
+    <div class="grid g4">
+      <article class="card role"><div class="ico" aria-hidden="true">📈</div><h3>경영 효율화</h3><p>비용·인력·자원 운영 현황을 살펴 투입 대비 성과를 높이는 방안을 제안합니다.</p></article>
+      <article class="card role"><div class="ico" aria-hidden="true">🔄</div><h3>PI (프로세스 혁신)</h3><p>업무 흐름을 단계별로 분석해 중복·대기·수작업을 줄이고 표준 프로세스를 설계합니다.</p></article>
+      <article class="card role"><div class="ico" aria-hidden="true">🔎</div><h3>진단 / 감사</h3><p>업무와 내부통제가 기준에 맞게 운영되는지 점검하고 개선 과제를 도출합니다.</p></article>
+      <article class="card role"><div class="ico" aria-hidden="true">🌱</div><h3>체질 개선</h3><p>개선이 일회성에 그치지 않도록 제도·교육·문화 측면의 지속 실행 기반을 만듭니다.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- PI 단계 -->
+<section id="pi">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">PI STEPS</span>
+      <h2>PI 추진 4단계</h2>
+      <p>현재 모습을 정확히 파악한 뒤 개선하고, 정착까지 이어가는 것이 핵심입니다.</p>
+    </div>
+    <ol class="timeline">
+      <li><div class="num">1</div><div><h3>As-Is 분석</h3><p>현재 업무 흐름·소요시간·문제점을 파악하고 낭비 요인을 식별합니다.</p></div></li>
+      <li><div class="num">2</div><div><h3>개선안 도출</h3><p>제거·통합·자동화 관점에서 To-Be 프로세스와 기대 효과를 설계합니다.</p></div></li>
+      <li><div class="num">3</div><div><h3>실행</h3><p>시범 적용 후 확대하며 담당자 역할·규정·시스템을 함께 정비합니다.</p></div></li>
+      <li><div class="num">4</div><div><h3>정착</h3><p>성과를 측정하고 표준화·교육·모니터링으로 새로운 방식을 유지합니다.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 혁신 사례 -->
+<section id="cases">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">CASES</span>
+      <h2>혁신 사례</h2>
+      <p>개선 전·후를 비교해 볼 수 있는 사례입니다.</p>
+    </div>
+    <div class="grid g3">
+      <article class="card case">
+        <span class="badge">중복 업무 제거</span>
+        <h3>구매 요청 승인 절차 간소화</h3>
+        <div class="ba">
+          <div class="b"><small>BEFORE</small><strong>승인 5단계</strong>처리 3일</div>
+          <div class="a"><small>AFTER</small><strong>승인 3단계</strong>처리 1일</div>
+        </div>
+        <p class="result">처리 기간 <span>약 67% 단축</span></p>
+      </article>
+      <article class="card case">
+        <span class="badge">수작업 자동화</span>
+        <h3>월간 실적 취합 표준화</h3>
+        <div class="ba">
+          <div class="b"><small>BEFORE</small><strong>월 16시간</strong>부서별 엑셀 수기 취합</div>
+          <div class="a"><small>AFTER</small><strong>월 4시간</strong>표준 양식·자동 집계</div>
+        </div>
+        <p class="result">작업 시간 <span>75% 절감</span></p>
+      </article>
+      <article class="card case">
+        <span class="badge">재작업 감소</span>
+        <h3>계약서 검토 체크리스트 도입</h3>
+        <div class="ba">
+          <div class="b"><small>BEFORE</small><strong>재검토 30%</strong>누락·오기로 반복 수정</div>
+          <div class="a"><small>AFTER</small><strong>재검토 10%</strong>사전 점검표로 1차 정확도↑</div>
+        </div>
+        <p class="result">재작업 비율 <span>20%p 감소</span></p>
+      </article>
+    </div>
+    <p class="note sample-note">※ 위 사례는 이해를 돕기 위한 <b>예시(가상 데이터)</b>입니다. 실제 사례·수치로 교체하여 게시하세요.</p>
+  </div>
+</section>
+
+<!-- 자가점검 -->
+<section id="check">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">SELF CHECK</span>
+      <h2>업무 낭비 자가점검</h2>
+      <p>우리 팀 업무에 해당하는 항목을 모두 체크하면 개선 우선순위를 알려드립니다.</p>
+    </div>
+    <div class="check-layout">
+      <div class="checks" id="checks" role="group" aria-label="낭비 항목 선택"></div>
+      <aside class="result-card" aria-live="polite">
+        <h3>개선 우선순위</h3>
+        <div class="level none" id="lvl">항목을 선택해 주세요</div>
+        <div class="meter" aria-hidden="true"><i id="meterbar"></i></div>
+        <p class="msg" id="lvlmsg">해당하는 낭비 항목을 체크하면 결과가 표시됩니다.</p>
+        <ul id="lvlList"></ul>
+        <button class="reset" id="resetCheck" type="button">선택 초기화</button>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- 효과 계산기 -->
+<section id="calc">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">CALCULATOR</span>
+      <h2>개선 효과 계산기</h2>
+      <p>건당 소요시간(개선 전·후)과 월 처리 건수를 입력하면 절감 시간과 절감률을 계산합니다.</p>
+    </div>
+    <div class="calc-layout">
+      <div class="card">
+        <div class="field">
+          <label for="before">개선 전 소요시간 (건당)</label>
+          <div class="inp"><input id="before" type="number" inputmode="decimal" min="0" step="any" placeholder="예: 30"><span class="unit">분</span></div>
+        </div>
+        <div class="field">
+          <label for="after">개선 후 소요시간 (건당)</label>
+          <div class="inp"><input id="after" type="number" inputmode="decimal" min="0" step="any" placeholder="예: 12"><span class="unit">분</span></div>
+        </div>
+        <div class="field">
+          <label for="cnt">월 처리 건수</label>
+          <div class="inp"><input id="cnt" type="number" inputmode="numeric" min="0" step="1" placeholder="예: 200"><span class="unit">건</span></div>
+        </div>
+        <button class="btn btn-dark" id="resetCalc" type="button">입력 초기화</button>
+        <p class="note" style="margin-top:12px">입력값은 이 화면에서만 계산되며 저장·전송되지 않습니다.</p>
+      </div>
+      <div class="card out-card" aria-live="polite">
+        <div class="kpis">
+          <div class="kpi big"><small>절감률</small><strong id="rate">–</strong></div>
+          <div class="kpi"><small>월 절감 시간</small><strong id="saveM">–</strong></div>
+          <div class="kpi"><small>연 환산 절감</small><strong id="saveY">–</strong></div>
+        </div>
+        <div class="bars" id="bars" hidden>
+          <div class="bar-row b"><span>개선 전</span><div class="track"><i id="barB"></i></div><span id="barBv"></span></div>
+          <div class="bar-row a"><span>개선 후</span><div class="track"><i id="barA"></i></div><span id="barAv"></span></div>
+        </div>
+        <p class="calc-msg" id="calcMsg">값을 입력하면 결과가 표시됩니다.</p>
+      </div>
+    </div>
+    <p class="note" style="margin-top:12px">※ 계산식: 월 절감 시간 = (개선 전 − 개선 후) × 월 처리 건수 ÷ 60 / 절감률 = (개선 전 − 개선 후) ÷ 개선 전 / 연 환산 = 월 절감 시간 × 12</p>
+  </div>
+</section>
+
+<!-- 윤리경영 -->
+<section id="ethics">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">ETHICS &amp; CONTROL</span>
+      <h2>윤리경영 · 내부통제 안내</h2>
+      <p>투명하고 공정한 업무 수행은 모든 개선 활동의 전제입니다.</p>
+    </div>
+    <div class="grid g3">
+      <article class="card eth"><div class="ico" aria-hidden="true">⚖️</div><h3>윤리강령 준수</h3><p>임직원은 법령과 윤리강령을 준수하고 공정·청렴하게 직무를 수행합니다.</p></article>
+      <article class="card eth"><div class="ico" aria-hidden="true">🤝</div><h3>이해상충 방지</h3><p>직무와 사적 이해관계가 충돌할 우려가 있으면 사전에 신고하고 관련 업무에서 배제됩니다.</p></article>
+      <article class="card eth"><div class="ico" aria-hidden="true">🎁</div><h3>금품·향응 수수 금지</h3><p>거래 상대방으로부터 부당한 금품·접대를 받거나 요구하지 않으며, 수수 시 즉시 신고합니다.</p></article>
+      <article class="card eth"><div class="ico" aria-hidden="true">🏢</div><h3>계열사 간 거래 유의</h3><p>특수관계인과의 거래는 공정거래 관련 법규와 내부 승인 절차에 따라 투명하게 처리합니다.</p></article>
+      <article class="card eth"><div class="ico" aria-hidden="true">🔐</div><h3>정보 보호</h3><p>업무상 알게 된 기밀·개인정보를 목적 외로 사용하거나 외부에 유출하지 않습니다.</p></article>
+      <article class="card eth"><div class="ico" aria-hidden="true">🛡️</div><h3>내부통제 운영</h3><p>업무 분장·승인·검토 절차를 준수하고, 통제 미비 사항은 개선 과제로 공유합니다.</p></article>
+    </div>
+    <div class="report">
+      <div>
+        <h3>비위·부조리 발견 시, 공식 제보 채널을 이용하세요</h3>
+        <p>제보자의 신원과 내용은 관련 규정에 따라 보호됩니다. 사실 확인이 어려운 경우에도 우선 문의할 수 있습니다.</p>
+      </div>
+      <button class="btn btn-lime" id="openReport" type="button">공식 제보 채널 안내 보기</button>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">FAQ</span>
+      <h2>자주 묻는 질문</h2>
+      <p>궁금한 키워드를 검색하거나 질문을 눌러 답변을 확인하세요.</p>
+    </div>
+    <div class="search"><input id="faqSearch" type="search" placeholder="질문 검색 (예: 제보, PI, 계산, 승인)" aria-label="FAQ 검색" autocomplete="off"></div>
+    <div class="faq-chips" id="faqCats" role="group" aria-label="FAQ 카테고리"></div>
+    <div class="faq-list" id="faqList">
+      <h3 class="faq-cat">PI 개념·대상</h3>
+      <details class="faq"><summary>PI란 무엇이며 어디에 초점을 두나요?</summary><div class="ans">PI(Process Innovation)는 일하는 방식 자체를 바꾸는 활동입니다. 사람을 더 열심히 일하게 하는 것이 아니라, 불필요한 단계를 없애고 순서를 바꾸는 데 초점을 둡니다. (근거: 업무혁신_PI추진_가이드 p.1)</div></details>
+      <details class="faq"><summary>어떤 업무가 PI 대상이며, 개선안은 어떤 순서로 검토하나요?</summary><div class="ans">대상은 반복적이고, 시간이 오래 걸리고, 오류가 잦은 업무입니다. 목표는 소요 시간 단축, 오류 감소, 담당자 부담 완화이며, 검토 순서는 없애기 → 줄이기 → 바꾸기 → 자동화하기입니다. (근거: 업무혁신_PI추진_가이드 p.1)</div></details>
+      <h3 class="faq-cat">PI 추진 절차</h3>
+      <details class="faq"><summary>PI는 어떤 단계로 추진하나요?</summary><div class="ans">① As-Is 분석: 현재 업무를 단계별로 적고 소요 시간을 측정합니다. ② 개선안 도출: 낭비 요소를 찾아 제거·단순화 방안을 만듭니다. ③ 실행: 일부 범위에 먼저 적용해 효과를 확인합니다. ④ 정착: 표준 절차로 문서화하고 전 범위에 확대합니다. (근거: 업무혁신_PI추진_가이드 p.1)</div></details>
+      <details class="faq"><summary>어떤 낭비 요소부터 점검해야 하나요?</summary><div class="ans">체크리스트는 중복 입력, 결재·확인 대기, 엑셀 수작업 집계, 오류로 인한 재작업, 아무도 보지 않는 보고서의 5개 항목입니다. 체크 항목이 많을수록 개선 효과가 크며, 특히 중복 입력과 수작업 집계는 효과가 빠르게 나타납니다. (근거: 업무혁신_PI추진_가이드 p.1)</div></details>
+      <h3 class="faq-cat">PI 효과 측정</h3>
+      <details class="faq"><summary>개선 효과는 어떻게 계산하나요?</summary><div class="ans">건당 절감 시간 = 개선 전 소요시간 − 개선 후 소요시간, 월 절감 시간 = 건당 절감 시간 × 월 처리 건수, 절감률 = 절감 시간 ÷ 개선 전 총 소요시간 × 100 입니다. 예를 들어 건당 30분에서 10분, 월 50건이면 월 약 16.7시간 절감, 절감률 약 67%입니다. (근거: 업무혁신_PI추진_가이드 p.2)</div></details>
+      <h3 class="faq-cat">윤리 – 금품·접대</h3>
+      <details class="faq"><summary>금품과 접대는 어디까지 허용되나요?</summary><div class="ans">직무 관련자로부터 금품을 받지 않고, 통상적인 범위를 벗어난 접대를 주고받지 않습니다. 경조사는 사내 기준에 따르며, 불가피하게 받은 경우 즉시 신고하고 반환 절차를 따릅니다. (근거: 윤리강령_행동규범 p.1)</div></details>
+      <h3 class="faq-cat">윤리 – 판단 기준</h3>
+      <details class="faq"><summary>허용 여부가 애매할 때는 어떻게 판단하나요?</summary><div class="ans">‘공개되어도 떳떳한가’를 기준으로 판단하고, 그래도 애매하면 사전에 문의합니다. (근거: 윤리강령_행동규범 p.1)</div></details>
+      <h3 class="faq-cat">윤리 – 이해충돌</h3>
+      <details class="faq"><summary>이해충돌이 우려되면 어떻게 해야 하나요?</summary><div class="ans">본인 또는 가족이 이해관계가 있는 거래에는 관여하지 않습니다. 이해충돌이 발생하거나 예상되면 사전에 신고하고, 겸직은 사전 승인을 받습니다. (근거: 윤리강령_행동규범 p.1)</div></details>
+      <h3 class="faq-cat">윤리 – 제보</h3>
+      <details class="faq"><summary>위반 사실을 알게 되면 어떻게 신고하며, 제보자는 보호되나요?</summary><div class="ans">공식 제보 채널을 통해 신고할 수 있습니다. 제보자의 신원은 보호되며 불이익을 받지 않고, 익명 제보도 가능합니다. 제보 내용은 담당 조직만 열람합니다. (근거: 윤리강령_행동규범 p.1)</div></details>
+      <details class="faq"><summary>허위 제보는 어떻게 되나요? 징계 기준 등은 어디에 문의하나요?</summary><div class="ans">허위 제보는 별도 조치 대상이 될 수 있습니다. 감사 대상·결과, 개별 사건 판단, 징계 기준은 이 자료에 포함되어 있지 않으므로 경영개선팀 또는 공식 제보 채널로 문의해 주십시오. (근거: 윤리강령_행동규범 p.1~2)</div></details>
+    </div>
+    <div class="faq-empty" id="faqEmpty">검색 결과가 없습니다. 다른 키워드로 검색해 보세요.</div>
+  </div>
+</section>
+
+<!-- 자료실 -->
+<section id="library">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">LIBRARY</span>
+      <h2>자료실</h2>
+      <p>윤리강령과 개선 제안 양식을 내려받을 수 있습니다.</p>
+    </div>
+    <div class="grid g2">
+      <article class="card file">
+        <div class="ftop"><div class="ficon">TXT</div><div><h3>윤리강령</h3><p>임직원 행동기준과 윤리 실천 원칙을 담은 문서입니다.</p></div></div>
+        <button class="btn btn-lime" type="button" data-file="ethics">윤리강령 다운로드</button>
+      </article>
+      <article class="card file">
+        <div class="ftop"><div class="ficon">TXT</div><div><h3>개선 제안 양식</h3><p>현재 문제·개선안·기대 효과를 정리해 제출하는 양식입니다.</p></div></div>
+        <button class="btn btn-lime" type="button" data-file="proposal">개선 제안 양식 다운로드</button>
+      </article>
+    </div>
+    <h3 class="doc-title">공식 문서 (PDF)</h3>
+    <ul class="doc-list">
+        <li class="card doc">
+          <div class="ficon" aria-hidden="true">PDF</div>
+          <div class="doc-info"><h3>업무혁신_PI추진_가이드.pdf</h3><p>PI의 개념과 대상 업무, 추진 절차, 효과 측정 방법을 안내하는 가이드입니다.</p></div>
+          <span class="doc-size" aria-label="파일 크기">272 KB</span>
+          <a class="btn btn-lime" href="files/pi-promotion-guide.pdf" download="업무혁신_PI추진_가이드.pdf">다운로드</a>
+        </li>
+        <li class="card doc">
+          <div class="ficon" aria-hidden="true">PDF</div>
+          <div class="doc-info"><h3>윤리강령_행동규범.pdf</h3><p>금품·접대, 이해충돌, 제보와 제보자 보호 등 임직원 행동 기준을 담은 문서입니다.</p></div>
+          <span class="doc-size" aria-label="파일 크기">239 KB</span>
+          <a class="btn btn-lime" href="files/ethics-code-of-conduct.pdf" download="윤리강령_행동규범.pdf">다운로드</a>
+        </li>
+    </ul>
+    <p class="note" style="margin-top:12px">※ 현재 내려받는 파일은 <b>샘플 초안</b>입니다. 공식 문서 파일 경로를 코드 상단 <code>CONFIG.files</code>에 지정하면 해당 파일로 연결됩니다.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><b>경영개선 포털</b> · 업무 혁신·윤리경영 안내</div>
+    <div>이 페이지는 입력 내용을 저장하거나 외부로 전송하지 않습니다.</div>
+  </div>
+</footer>
+
+<!-- 맨 위로 -->
+<button class="to-top" id="toTop" type="button" aria-label="맨 위로 이동">
+  <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 19V6M6 11.5l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<!-- 제보 채널 안내 -->
+<dialog id="reportDlg" aria-labelledby="reportTitle">
+  <div class="dlg">
+    <h3 id="reportTitle">공식 제보 채널 안내</h3>
+    <p style="color:var(--ch600);font-size:15px">아래 정보는 사내 공식 안내 기준으로 기재해야 합니다.</p>
+    <dl id="reportInfo"></dl>
+    <div class="warn">⚠ 게시 전 실제 채널 정보를 코드 상단 <code>CONFIG.report</code>에 입력하세요. 입력 전 값은 자리표시자입니다.</div>
+    <div class="row">
+      <a class="btn btn-lime" id="reportLink" href="#" target="_blank" rel="noopener noreferrer" hidden>제보 페이지로 이동</a>
+      <button class="btn btn-dark" id="closeReport" type="button">닫기</button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+/* ===== 게시 전 수정 영역 ===== */
+const CONFIG = {
+  // 공식 제보 채널 정보 (실제 값으로 교체). url 입력 시 '제보 페이지로 이동' 버튼이 나타남
+  report: {
+    url:   "",                              // 예: 사내 윤리경영 제보 시스템 주소
+    phone: "[담당 부서 전화번호 입력]",
+    email: "[제보 전용 이메일 입력]",
+    hours: "[운영 시간 입력]",
+    note:  "[익명 제보 가능 여부 등 안내 문구 입력]"
+  },
+  // 자료실 공식 파일 경로 (비워두면 샘플 초안이 생성되어 다운로드됨)
+  files: {
+    ethics:   { url: "", name: "윤리강령_샘플.txt" },
+    proposal: { url: "", name: "개선제안양식_샘플.txt" }
+  }
+};
+
+/* ===== 상단 메뉴 ===== */
+const topbar = document.getElementById('topbar');
+const burger = document.getElementById('burger');
+const nav = document.getElementById('mainnav');
+
+function setNavH(){
+  const bar = topbar.querySelector('.wrap');
+  // 모바일 메뉴가 닫혀 있을 때의 막대 높이를 기준으로 스크롤 여백 설정
+  const wasOpen = nav.classList.contains('open');
+  if (wasOpen) nav.classList.remove('open');
+  document.documentElement.style.setProperty('--nav-h', topbar.offsetHeight + 'px');
+  if (wasOpen) nav.classList.add('open');
+}
+setNavH();
+window.addEventListener('resize', setNavH);
+window.addEventListener('load', setNavH);
+
+const navNow = document.getElementById('navNow');
+function setMenu(open){
+  nav.classList.toggle('open', open);
+  burger.setAttribute('aria-expanded', String(open));
+  burger.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+}
+burger.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
+// 메뉴 항목·로고를 누르면 자동으로 닫힘
+nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+document.querySelector('.brand').addEventListener('click', () => setMenu(false));
+// Esc 키, 메뉴 바깥 터치, 넓은 화면으로 바뀔 때도 닫힘
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && nav.classList.contains('open')){ setMenu(false); burger.focus(); }
+});
+document.addEventListener('click', e => {
+  if (nav.classList.contains('open') && !topbar.contains(e.target)) setMenu(false);
+});
+window.matchMedia('(min-width:961px)').addEventListener('change', e => { if (e.matches) setMenu(false); });
+
+// 현재 영역 강조 (스크롤 위치에 따라 메뉴 항목 강조 + 모바일 상단에 현재 영역 이름 표시)
+const links = [...nav.querySelectorAll('a')];
+const secs = links.map(a => document.querySelector(a.getAttribute('href')));
+let lockIdx = -1, lockTimer;
+function paint(idx){
+  links.forEach((a,i) => {
+    a.classList.toggle('active', i === idx);
+    if (i === idx) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current');
+  });
+  navNow.textContent = links[idx].textContent;
+}
+function updateActive(){
+  if (lockIdx >= 0) return;
+  const y = window.scrollY + topbar.offsetHeight + 40;
+  let idx = 0;
+  secs.forEach((s,i) => { if (s && s.offsetTop <= y) idx = i; });
+  if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) idx = secs.length - 1;
+  paint(idx);
+}
+// 메뉴를 눌러 이동하는 동안에는 누른 항목을 고정해 강조가 깜빡이지 않게 함
+links.forEach((a,i) => a.addEventListener('click', () => {
+  lockIdx = i; paint(i); clearTimeout(lockTimer);
+  const unlock = () => { clearTimeout(lockTimer); lockIdx = -1; updateActive(); };
+  lockTimer = setTimeout(unlock, 1000);
+  window.addEventListener('scrollend', unlock, {once:true});
+}));
+window.addEventListener('scroll', updateActive, {passive:true});
+window.addEventListener('resize', updateActive);
+updateActive();
+
+/* ===== 다크 모드 · 맨 위로 ===== */
+const rootEl = document.documentElement;
+const themeBtn = document.getElementById('themeBtn');
+function applyTheme(t, save){
+  rootEl.dataset.theme = t;
+  themeBtn.setAttribute('aria-pressed', String(t === 'dark'));
+  if (save){ try{ localStorage.setItem('portal-theme', t); }catch(e){} }
+}
+applyTheme(rootEl.dataset.theme === 'dark' ? 'dark' : 'light', false);
+themeBtn.addEventListener('click', () => applyTheme(rootEl.dataset.theme === 'dark' ? 'light' : 'dark', true));
+
+const toTop = document.getElementById('toTop');
+function toggleTop(){ toTop.classList.toggle('show', window.scrollY > 400); }
+window.addEventListener('scroll', toggleTop, {passive:true});
+toggleTop();
+toTop.addEventListener('click', () => {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.scrollTo({top:0, behavior: reduce ? 'auto' : 'smooth'});
+  const home = document.getElementById('home');
+  home.setAttribute('tabindex', '-1');
+  home.focus({preventScroll:true});
+});
+
+/* ===== 자가점검 ===== */
+const WASTE = [
+  {t:'중복 업무', d:'같은 자료·보고를 여러 곳에 반복 입력하거나 제출한다.', a:'중복 입력·보고 통합, 단일 원천(Single Source) 설정'},
+  {t:'대기 시간', d:'승인·회신·자료 전달을 기다리며 업무가 멈춘다.', a:'승인 단계 축소, 위임 전결·처리 기한(SLA) 설정'},
+  {t:'수작업', d:'엑셀 복사·붙여넣기 등 사람이 직접 취합·변환한다.', a:'양식 표준화, 자동 집계·시스템 연동 검토'},
+  {t:'재작업', d:'누락·오류·기준 불명확으로 같은 업무를 다시 한다.', a:'체크리스트 도입, 작성 기준·사례 공유'},
+  {t:'불필요한 보고·회의', d:'결정에 쓰이지 않는 보고서·정례 회의가 있다.', a:'보고 목적 재정의, 회의 통폐합·주기 조정'},
+  {t:'정보 단절', d:'부서 간 정보가 공유되지 않아 문의·확인이 잦다.', a:'공유 채널·문서 위치 일원화, 담당자 명확화'},
+  {t:'업무 기준 불명확', d:'사람마다 처리 방식이 달라 결과가 들쭉날쭉하다.', a:'업무 매뉴얼·표준 절차(SOP) 정립'},
+  {t:'과도한 문서화', d:'기록·증빙 작업이 실제 업무보다 오래 걸린다.', a:'필수 증빙 기준 정리, 문서 양식 간소화'}
+];
+const checksEl = document.getElementById('checks');
+WASTE.forEach((w,i) => {
+  const l = document.createElement('label');
+  l.className = 'chk';
+  l.innerHTML = `<input type="checkbox" value="${i}"><div><b>${w.t}</b><span>${w.d}</span></div>`;
+  checksEl.appendChild(l);
+});
+const lvl = document.getElementById('lvl'), lvlmsg = document.getElementById('lvlmsg'),
+      lvlList = document.getElementById('lvlList'), meter = document.getElementById('meterbar');
+function evalCheck(){
+  const sel = [...checksEl.querySelectorAll('input:checked')].map(c => +c.value);
+  const n = sel.length;
+  lvl.className = 'level';
+  lvlList.innerHTML = '';
+  if (!n){
+    lvl.classList.add('none'); lvl.textContent = '항목을 선택해 주세요';
+    lvlmsg.textContent = '해당하는 낭비 항목을 체크하면 결과가 표시됩니다.';
+    meter.style.width = '0';
+    return;
+  }
+  let name, cls, msg;
+  if (n <= 2){ name='낮음'; cls='low'; msg='일부 낭비가 있으나 영향은 제한적입니다. 개별 개선으로 대응하고 정기적으로 재점검하세요.'; }
+  else if (n <= 5){ name='보통'; cls='mid'; msg='여러 낭비가 중첩되어 있습니다. 핵심 업무를 선정해 As-Is 분석부터 시작할 것을 권장합니다.'; }
+  else { name='높음'; cls='high'; msg='낭비가 광범위합니다. 프로세스 전반의 PI 과제로 추진하고 경영개선 담당 부서와 협의하세요.'; }
+  lvl.classList.add(cls); lvl.textContent = name;
+  lvlmsg.textContent = `선택 ${n}개 / 전체 ${WASTE.length}개 — ` + msg;
+  meter.style.width = (n / WASTE.length * 100) + '%';
+  sel.forEach(i => { const li = document.createElement('li'); li.textContent = `${WASTE[i].t}: ${WASTE[i].a}`; lvlList.appendChild(li); });
+}
+checksEl.addEventListener('change', evalCheck);
+document.getElementById('resetCheck').addEventListener('click', () => {
+  checksEl.querySelectorAll('input').forEach(c => c.checked = false); evalCheck();
+});
+
+/* ===== 효과 계산기 ===== */
+const $ = id => document.getElementById(id);
+const fmt = (v, d=1) => v.toLocaleString('ko-KR', {maximumFractionDigits:d});
+function calc(){
+  const b = parseFloat($('before').value), a = parseFloat($('after').value), c = parseFloat($('cnt').value);
+  const msg = $('calcMsg');
+  const reset = () => { $('rate').textContent = $('saveM').textContent = $('saveY').textContent = '–'; $('bars').hidden = true; };
+  if ([b,a,c].some(v => isNaN(v))){ reset(); msg.textContent = '값을 입력하면 결과가 표시됩니다.'; return; }
+  if (b < 0 || a < 0 || c < 0){ reset(); msg.textContent = '0 이상의 값을 입력해 주세요.'; return; }
+  if (b === 0){ reset(); msg.textContent = '개선 전 소요시간은 0보다 커야 합니다.'; return; }
+  const rate = (b - a) / b * 100;
+  const saveM = (b - a) * c / 60;
+  const totB = b * c / 60, totA = a * c / 60;
+  $('rate').textContent = fmt(rate) + '%';
+  $('saveM').textContent = fmt(saveM) + '시간';
+  $('saveY').textContent = fmt(saveM * 12) + '시간';
+  $('bars').hidden = false;
+  const max = Math.max(totB, totA) || 1;
+  $('barB').style.width = (totB / max * 100) + '%';
+  $('barA').style.width = (totA / max * 100) + '%';
+  $('barBv').textContent = fmt(totB) + 'h/월';
+  $('barAv').textContent = fmt(totA) + 'h/월';
+  if (a > b) msg.textContent = '⚠ 개선 후 시간이 더 깁니다. (소요시간 증가 — 음수 값은 증가를 의미)';
+  else if (a === b) msg.textContent = '개선 전·후 시간이 같아 절감 효과가 없습니다.';
+  else msg.textContent = `건당 ${fmt(b - a)}분 단축 × 월 ${fmt(c, 0)}건 기준입니다.`;
+}
+['before','after','cnt'].forEach(id => $(id).addEventListener('input', calc));
+$('resetCalc').addEventListener('click', () => { ['before','after','cnt'].forEach(id => $(id).value=''); calc(); });
+
+/* ===== 제보 채널 안내 ===== */
+const dlg = $('reportDlg');
+$('openReport').addEventListener('click', () => {
+  const r = CONFIG.report;
+  const rows = [['전화', r.phone], ['이메일', r.email], ['운영 시간', r.hours], ['안내', r.note]];
+  const dl = $('reportInfo'); dl.innerHTML = '';
+  rows.forEach(([k,v]) => { const dt = document.createElement('dt'), dd = document.createElement('dd'); dt.textContent = k; dd.textContent = v; dl.append(dt, dd); });
+  const link = $('reportLink');
+  if (r.url){ link.href = r.url; link.hidden = false; } else { link.hidden = true; }
+  if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open','');
+});
+$('closeReport').addEventListener('click', () => dlg.close ? dlg.close() : dlg.removeAttribute('open'));
+dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+
+/* ===== FAQ 검색 · 카테고리 ===== */
+const faqs = [...document.querySelectorAll('details.faq')];
+const orig = faqs.map(d => ({s: d.querySelector('summary').textContent, a: d.querySelector('.ans').textContent}));
+const esc = s => s.replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+// 각 질문이 속한 카테고리(앞쪽 분류 제목 기준)
+const faqCats = [];
+let curCat = '';
+document.querySelectorAll('#faqList > *').forEach(el => {
+  if (el.classList.contains('faq-cat')) curCat = el.textContent.trim();
+  else if (el.matches('details.faq')) faqCats.push(curCat);
+});
+
+// 카테고리 버튼: 분류 제목에서 자동 생성 (FAQ를 추가해도 버튼이 따라옴)
+let activeCat = '';
+const catBox = $('faqCats');
+[['', '전체'], ...[...new Set(faqCats)].map(n => [n, n])].forEach(([val, label]) => {
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = 'chip'; b.textContent = label; b.dataset.cat = val;
+  b.setAttribute('aria-pressed', val === '' ? 'true' : 'false');
+  catBox.appendChild(b);
+});
+catBox.addEventListener('click', e => {
+  const b = e.target.closest('.chip'); if (!b) return;
+  activeCat = b.dataset.cat;
+  catBox.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+  renderFaq();
+});
+
+function renderFaq(){
+  const q = $('faqSearch').value.trim();
+  let shown = 0;
+  faqs.forEach((d,i) => {
+    const sum = d.querySelector('summary'), ans = d.querySelector('.ans');
+    const inCat = !activeCat || faqCats[i] === activeCat;
+    const inText = !q || (orig[i].s + ' ' + orig[i].a).toLowerCase().includes(q.toLowerCase());
+    const hit = inCat && inText;
+    d.hidden = !hit;
+    if (hit) shown++;
+    if (q && hit){
+      const re = new RegExp('(' + reEsc(q) + ')', 'gi');
+      sum.innerHTML = esc(orig[i].s).replace(re, '<mark>$1</mark>');
+      ans.innerHTML = esc(orig[i].a).replace(re, '<mark>$1</mark>');
+      d.open = true;
+    } else {
+      sum.textContent = orig[i].s; ans.textContent = orig[i].a;
+      if (!q) d.open = false;
+    }
+  });
+  document.querySelectorAll('#faqList .faq-cat').forEach(h => {
+    let n = h.nextElementSibling, any = false;
+    while (n && !n.classList.contains('faq-cat')){ if (!n.hidden) any = true; n = n.nextElementSibling; }
+    h.hidden = !any;
+  });
+  $('faqEmpty').style.display = shown ? 'none' : 'block';
+}
+$('faqSearch').addEventListener('input', renderFaq);
+
+/* ===== 자료실 다운로드 ===== */
+const SAMPLE = {
+  ethics: `윤리강령 (샘플 초안)\n\n※ 본 문서는 양식 예시입니다. 반드시 공식 윤리강령으로 교체하여 배포하세요.\n\n1. 법령 및 사규 준수\n   - 임직원은 관련 법령과 사규를 준수한다.\n2. 공정한 직무 수행\n   - 사적 이해관계가 직무에 영향을 주지 않도록 한다.\n3. 금품·향응 수수 금지\n   - 부당한 금품·접대를 주고받지 않으며, 수수 시 즉시 신고한다.\n4. 정보 보호\n   - 업무상 알게 된 기밀·개인정보를 목적 외로 사용하거나 유출하지 않는다.\n5. 신고 및 보호\n   - 위반 사실을 알게 된 경우 공식 채널로 신고하며, 신고자는 규정에 따라 보호된다.\n`,
+  proposal: `개선 제안서 (양식 샘플)\n\n1. 제안자 정보\n   - 소속 / 성명 / 연락처 :\n\n2. 제안 제목 :\n\n3. 현재 문제점 (As-Is)\n   - 대상 업무 :\n   - 문제 내용(중복·대기·수작업·재작업 등) :\n   - 현재 소요시간(건당) / 월 처리 건수 :\n\n4. 개선안 (To-Be)\n   - 개선 내용 :\n   - 필요 자원(시스템·인력·예산) :\n\n5. 기대 효과\n   - 개선 후 소요시간(건당) :\n   - 월 절감 시간 / 절감률 :\n   - 정성적 효과(품질·리스크 등) :\n\n6. 실행 일정 및 담당 :\n`
+};
+document.querySelectorAll('[data-file]').forEach(btn => btn.addEventListener('click', () => {
+  const key = btn.dataset.file, f = CONFIG.files[key];
+  const a = document.createElement('a');
+  if (f.url){ a.href = f.url; a.download = f.name; }
+  else {
+    const blob = new Blob(['﻿' + SAMPLE[key]], {type:'text/plain;charset=utf-8'});
+    a.href = URL.createObjectURL(blob); a.download = f.name;
+  }
+  document.body.appendChild(a); a.click(); a.remove();
+  if (!f.url) setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}));
+</script>
+</body>
+</html>
